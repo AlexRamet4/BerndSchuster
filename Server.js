@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const winston = require('winston')
 
 class Server {
 
@@ -30,12 +31,80 @@ class Server {
 
     routes() {
 
-        this.app.get('/*', function (req, res) {
+        this.app.get('/quirosMedia', (req, res) => {
 
-            res.sendFile(path.join(__dirname, '../public/index.html'), function (err) {
+            console.log(path.join(__dirname, './public/quirosMedia.html'))
+            res.sendFile(path.join(__dirname, './public/quirosMedia.html'), function (err) {
 
                 if (err) {
 
+                    winston.log('info', err);
+                    res.status(500).send(err);
+
+                }
+
+            });
+        });
+
+        this.app.get('/noticias', (req, res) => {
+
+            console.log(path.join(__dirname, './public/noticias.html'))
+            res.sendFile(path.join(__dirname, './public/noticias.html'), function (err) {
+
+                if (err) {
+
+                    winston.log('info', '-------Hello log files!------------', {
+                        someKey: 'some-value'
+                    });
+                    res.status(500).send(err);
+
+                }
+
+            });
+        });
+
+
+        this.app.get('/galeria', (req, res) => {
+
+            console.log(path.join(__dirname, './public/galeria.html'))
+            res.sendFile(path.join(__dirname, './public/galeria.html'), function (err) {
+
+                if (err) {
+
+                    winston.log('info', '-------Hello log files!------------', {
+                        someKey: 'some-value'
+                    });
+                    res.status(500).send(err);
+
+                }
+
+            });
+        });
+
+        this.app.get('/biografia', (req, res) => {
+            res.sendFile(path.join(__dirname, './public/biografia.html'), function (err) {
+
+                if (err) {
+
+                    winston.log('info', '-------Hello log files!------------', {
+                        someKey: 'some-value'
+                    });
+                    res.status(500).send(err);
+
+                }
+
+            });
+        });
+
+        this.app.get('/*', function (req, res) {
+
+            res.sendFile(path.join(__dirname, './public/index.html'), function (err) {
+
+                if (err) {
+
+                    winston.log('info', '-------Hello log files!------------', {
+                        someKey: 'some-value'
+                    });
                     res.status(500).send(err);
 
                 }
